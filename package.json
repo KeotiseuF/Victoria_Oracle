@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "talwind": "npx tailwindcss -i ./static/css/__global.css -o ./static/css/__global-out.css --watch",
+    "dev": "py manage.py runserver"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.15"
+  },
+  "dependencies": {
+    "flowbite": "^2.5.2"
+  }
+}

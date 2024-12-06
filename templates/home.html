@@ -1,0 +1,59 @@
+{% extends './__base.html' %}
+{% load static %}
+
+{% block css %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block main %}
+  <div class="container-h1-title">
+    <h1>Victoria Oracle</h1>
+    <p>Le secret pour être toujours en avance sur le jeu.</p>
+  </div>
+  <section>
+    <h2>Match du jour</h2>
+    {% for championship in daily_match %}
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-4/5 mb-10">
+        <table class="w-full text-sm text-left rtl:text-right text-slate-800 dark:text-gray-400">
+          <thead class="text-xs bg-slate-900 text-white uppercase bg-gray-50 dark:bg-white dark:text-black">
+            <tr>
+              <th scope="col" class="px-6 py-3 w-1/4">
+                {{ championship.name}}
+              </th>
+              <th scope="col" class="px-6 py-3 text-center">
+                Heure
+              </th>
+              <th scope="col" class="px-6 py-3 text-center">
+                Prédiction
+              </th>
+              <th scope="col" class="px-6 py-3">
+              </th>
+          </tr>
+          </thead>
+          <tbody class="border">
+            {% for match in championship.matches %}
+              <tr class="odd:bg-white odd:dark:bg-gray-300 even:bg-gray-300 even:dark:bg-gray-200 border-b dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  {{ match.name }}
+                </th>
+                <td class="px-6 py-4 text-center">
+                  {{ match.hour }}
+                </td>
+                <td class="px-6 py-4 text-center text-red-500 font-bold">
+                  {% if match.cancel %} INDISPONIBLE {% endif %}
+                </td>
+                <td class="px-6 py-4 text-center">
+                  <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Détails</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endfor %}
+    {% if daily_match|length == 0 %}
+      <p>Pas de match aujourd'hui.</p>
+    {% endif %}
+  </section>
+{% endblock %}
