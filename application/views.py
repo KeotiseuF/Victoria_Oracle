@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .utils.direct_match import get_daily_match, get_tomorrow_match
+from .utils.match import get_daily_match, get_tomorrow_match
 
 def home(request):
   daily_match = get_daily_match()

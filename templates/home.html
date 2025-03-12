@@ -35,13 +35,17 @@
             {% for match in championship.matches %}
               <tr class="odd:bg-white odd:dark:bg-gray-300 even:bg-gray-300 even:dark:bg-gray-200 border-b dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  {{ match.name }}
+                  {{ match.home }} - {{ match.away }}
                 </th>
                 <td class="px-6 py-4 text-center">
-                  {{ match.hour }}
+                  {% if match.match_date %}
+                    {{ match.match_date|time:'H:i' }}
+                  {% else %}
+                    ANNULER
+                  {% endif %}
                 </td>
                 <td class="px-6 py-4 text-center text-red-500 font-bold">
-                  {% if match.cancel %} INDISPONIBLE {% endif %}
+                  {% if match.match_date is None %} INDISPONIBLE {% endif %}
                 </td>
                 <td class="px-6 py-4 text-center">
                   <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Détails</a>
